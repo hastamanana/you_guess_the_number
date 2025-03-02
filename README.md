@@ -23,6 +23,6 @@
 
 ---
 
-## Автор
+## Автор 
 
 [Telegram](https://t.me/ozornoy_gulyaka)
