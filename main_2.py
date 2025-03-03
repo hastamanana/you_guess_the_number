@@ -3,14 +3,15 @@ import math
 
 # добавил автоматическое определние мин. и макс. значений 
 range_nums = list(map(int, input().split()))
+
 start = min(range_nums)
 end = max(range_nums)
 
-assert start < end, "Укажите корректный диапазон"
+assert start != end, "Укажите корректный диапазон"
 
 # добавил кол-во попыток в зависимости от диапазона
 all_nums_in_range = end - start
-max_attempt: int = math.ceil(math.log(all_nums_in_range, 2)) + 1
+max_attempt: int = int(math.log2(all_nums_in_range)) + 1
 # вывод кол-ва попыток для указанного диапазона (опционально)
 print(max_attempt)
 
@@ -24,27 +25,26 @@ while attempt < max_attempt:
 
     #todo сделал
     print(middle)
-    ans: str = None
+    ans: str = input()
     while ans not in answers:
+        print("Возможные ответы:", answers)
         ans: str = input()
-        if ans not in answers:
-            print("Возможные ответы:", answers)
-            continue
-    else:
-        attempt += 1
+            
+    
+    attempt += 1
 
-        if ans == "угадал":
-            print(
-                f"Я угадал! Загаданное число {middle}. "
-                f"Количество попыток: {attempt}"
-            )
-            break
+    if ans == "угадал":
+        print(
+            f"Я угадал! Загаданное число {middle}. "
+            f"Количество попыток: {attempt}"
+        )
+        break
 
-        if ans == "больше":
-            start = middle + 1
-        elif ans == "меньше":
-            end = middle - 1
+    if ans == "больше":
+        start = middle + 1
+    elif ans == "меньше":
+        end = middle - 1
 
-        if start > end:
-            print("Ошибка! Похоже, вы дали противоречивые ответы.")
-            break
+    if start > end:
+        print("Ошибка! Похоже, вы дали противоречивые ответы.")
+        break
