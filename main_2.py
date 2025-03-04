@@ -1,10 +1,10 @@
 import math
 
 
-def range_2_numbers():
+def range_2_numbers() -> tuple[int,int]:
     while True:
         try:
-            range_nums = list(map(int, input('Введите 2 неравных числа через пробел: ').split()))
+            range_nums: list = list(map(int, input('Введите 2 неравных числа через пробел: ').split()))
             
         except ValueError:
             print('Нужно ввести 2 неравных числа через пробел! Попробуйте еще раз')
@@ -23,20 +23,16 @@ def range_2_numbers():
             if range_nums[0] < 1 or range_nums[1] < 1:
                 print("Оба числа должны быть больше 0. Попробуйте еще раз")
                 continue
-
-        break
-
-    start_range = min(range_nums)
-    end_range = max(range_nums)
-
-    return start_range, end_range
+                    
+        return min(range_nums), max(range_nums)
 
 
-def count_attempts(start_num, end_num):
+def get_max_attempt_count(start_num, end_num) -> int:
     diff = end_num - start_num
     return int(math.log2(diff)) + 1
 
-def game(start, end, max_attempt):
+
+def game(start, end, max_attempt) -> None:
     attempt: int = 0
     answers: tuple[str, ...] = ("угадал", "больше", "меньше")
 
@@ -68,12 +64,9 @@ def game(start, end, max_attempt):
             break
 
 
-
-
-
-def main():
+def main() -> None:
     start, end = range_2_numbers()
-    max_attempt = count_attempts(start, end)
+    max_attempt = get_max_attempt_count(start, end)
     game(start, end, max_attempt)
 
 
